@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<LangVersion>preview</LangVersion>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<AnalysisLevel>latest</AnalysisLevel>
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+		<NoWarn>CA2007,CA1305,CA1310,CA1002,CA1707,CA1307,CA1304,CA1311,CA1805,IDE0045,IDE0046,IDE0090,IDE0057,IDE0305,IDE0005</NoWarn>
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\NF.Tool.ExcelFlow.Common.Model\NF.Tool.ExcelFlow.Common.Model.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<!--<PackageReference Include="Mono.TextTemplating" Version="3.0.0" />-->
+		<PackageReference Include="Mono.TextTemplating.Roslyn" Version="3.0.0" />
+		<PackageReference Include="SmartFormat.NET" Version="3.6.1" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" />
+	</ItemGroup>
+</Project>
