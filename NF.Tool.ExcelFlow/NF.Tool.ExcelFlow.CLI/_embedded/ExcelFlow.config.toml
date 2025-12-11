@@ -1,0 +1,11 @@
+[ExcelFlow]
+InputPaths   = ["a", "b"]
+Namespace    = "HEE"
+TemplatePath = "hello.template"
+EndOfLine    = "LF" # LF | CRLF | ENVIRONMENT
+
+[ExcelFlow.Codegen]
+OutputDirectory = "outdir"
+
+[ExcelFlow.Db]
+OutputDatabasePath = "a.db"
