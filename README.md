@@ -1,9 +1,9 @@
-# NF.Tool.ExelFlow
+# NF.Tool.ExcelFlow
 
-[![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/netpyoung/NF.Tool.ExelFlow)
-[![.NET Test Workflow](https://github.com/netpyoung/NF.Tool.ExelFlow/actions/workflows/dotnet-test.yml/badge.svg)](https://github.com/netpyoung/NF.Tool.ExelFlow/actions/workflows/dotnet-test.yml)
-[![Document](https://img.shields.io/badge/document-docfx-blue)](https://netpyoung.github.io/NF.Tool.ExelFlow/)
-[![License](https://img.shields.io/badge/license-MIT-C06524)](https://github.com/netpyoung/NF.Tool.ExelFlow/blob/main/LICENSE.md)
+[![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/netpyoung/NF.Tool.ExcelFlow)
+[![.NET Test Workflow](https://github.com/netpyoung/NF.Tool.ExcelFlow/actions/workflows/dotnet-test.yml/badge.svg)](https://github.com/netpyoung/NF.Tool.ExcelFlow/actions/workflows/dotnet-test.yml)
+[![Document](https://img.shields.io/badge/document-docfx-blue)](https://netpyoung.github.io/NF.Tool.ExcelFlow/)
+[![License](https://img.shields.io/badge/license-MIT-C06524)](https://github.com/netpyoung/NF.Tool.ExcelFlow/blob/main/LICENSE.md)
 [![NuGet](https://img.shields.io/nuget/v/dotnet-excel-flow.svg?style=flat&label=NuGet%3A%20dotnet-excel-flow)](https://www.nuget.org/packages/dotnet-excel-flow/)
 
 ## Overview
@@ -25,7 +25,7 @@ sequenceDiagram
 
 ## Document
 
-- [Documentation](https://netpyoung.github.io/NF.Tool.ExelFlow/)
+- [Documentation](https://netpyoung.github.io/NF.Tool.ExcelFlow/)
 
 ## Dependencies
 
@@ -39,4 +39,4 @@ sequenceDiagram
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/netpyoung/NF.Tool.ExelFlow/blob/main/LICENSE.md) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/netpyoung/NF.Tool.ExcelFlow/blob/main/LICENSE.md) file for details.
