@@ -486,3 +486,6 @@ $RECYCLE.BIN/
 
 ## autogen
 /autogen/
+
+## launchSettings.json
+launchSettings.json 
