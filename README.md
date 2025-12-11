@@ -19,7 +19,7 @@ sequenceDiagram
     excel-flow ->> excel-flow: T4 template
     excel-flow ->> csharp.cs : codegen
     excel-flow ->> excel-flow: Assembly - roslyn
-    excel-flow ->> sqlite.db : db
+    excel-flow ->> sqlite.db : sqlite
     deactivate excel-flow
 ```
 
