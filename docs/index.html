@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>NF.Tool.ExelFlow | NF.Tool.ExcelFlow </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="NF.Tool.ExelFlow | NF.Tool.ExcelFlow ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/netpyoung/NF.Tool.ExcelFlow/blob/main/docfx/docs/index.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-855BJNV9VD"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-855BJNV9VD');
+      </script>
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="NF.Tool.ExcelFlow">
+            NF.Tool.ExcelFlow
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="nftoolexelflow">NF.Tool.ExelFlow</h1>
+
+<p><a href="https://github.com/netpyoung/NF.Tool.ExelFlow"><img src="https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&amp;logoColor=white" alt="GitHub"></a>
+<a href="https://github.com/netpyoung/NF.Tool.ExelFlow/actions/workflows/dotnet-test.yml"><img src="https://github.com/netpyoung/NF.Tool.ExelFlow/actions/workflows/dotnet-test.yml/badge.svg" alt=".NET Test Workflow"></a>
+<a href="https://netpyoung.github.io/NF.Tool.ExelFlow/"><img src="https://img.shields.io/badge/document-docfx-blue" alt="Document"></a>
+<a href="https://github.com/netpyoung/NF.Tool.ExelFlow/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-C06524" alt="License"></a>
+<a href="https://www.nuget.org/packages/dotnet-excel-flow/"><img src="https://img.shields.io/nuget/v/dotnet-excel-flow.svg?style=flat&amp;label=NuGet%3A%20dotnet-excel-flow" alt="NuGet"></a></p>
+<h2 id="overview">Overview</h2>
+<p>Generate code(C#) &amp; database(sqlite) from Exel.</p>
+<pre><code class="lang-mermaid">sequenceDiagram
+
+    xlsx -&gt;&gt; excel-flow: dotnet excel-flow
+
+    activate excel-flow
+    excel-flow -&gt;&gt; excel-flow: T4 template
+    excel-flow -&gt;&gt; csharp.cs : codegen
+    excel-flow -&gt;&gt; excel-flow: Assembly - roslyn
+    excel-flow -&gt;&gt; sqlite.db : sqlite
+    deactivate excel-flow
+</code></pre>
+<h2 id="document">Document</h2>
+<ul>
+<li><a href="https://netpyoung.github.io/NF.Tool.ExelFlow/">Documentation</a></li>
+</ul>
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+<li><a href="https://github.com/xoofx/Tomlyn">xoofx/Tomlyn library</a> for <a href="https://toml.io/en/">Toml format</a> Config file.</li>
+<li><a href="https://github.com/mono/t4">mono/t4 library</a> for <a href="https://learn.microsoft.com/en-us/visualstudio/modeling/code-generation-and-t4-text-templates">T4 template</a>.</li>
+<li><a href="https://spectreconsole.net/cli/">Spectre.Console.Cli</a> for parse args.</li>
+<li><a href="https://github.com/axuno/SmartFormat">SmartFormat</a> for format string.</li>
+<li><a href="https://github.com/praeclarum/sqlite-net">sqlite-net-pcl</a> for sqlite</li>
+<li><a href="https://github.com/nissl-lab/npoi">NPOI</a> for exel</li>
+<li><a href="https://github.com/dotnet/roslyn">Microsoft.CodeAnalysis.CSharp</a> for Assembly</li>
+</ul>
+<h2 id="license">License</h2>
+<p>This project is licensed under the MIT License. See the <a href="https://github.com/netpyoung/NF.Tool.ExelFlow/blob/main/LICENSE.md">LICENSE</a> file for details.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/netpyoung/NF.Tool.ExcelFlow/blob/main/docfx/docs/index.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
