@@ -55,7 +55,7 @@ public static class ExcelToModelBaker
         using (FileStream fileStream = File.Open(excelPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
         using (XSSFWorkbook excel = new XSSFWorkbook(fileStream, readOnly: true))
         {
-            List<List<RegionInfo>> sheetRegionss = Parser_RegionInfo.CollectRegionsFromExel(excel);
+            List<List<RegionInfo>> sheetRegionss = Parser_RegionInfo.CollectRegionsFromExcel(excel);
             List<ModelRoot> ret = new List<ModelRoot>(capacity: sheetRegionss.Count);
 
             StringBuilder sb = new StringBuilder();

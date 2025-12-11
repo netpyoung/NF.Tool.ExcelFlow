@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NF.Tool.ExcelFlow.CLI.Commands;
 
-[Description("Generate code from exel")]
+[Description("Generate code from excel")]
 internal sealed class Command_Codegen : AsyncCommand<Command_Codegen.Settings>
 {
     internal sealed class Settings : ExcelFlowConfigSettings, IExcelFlowConfig_Codegen

@@ -53,7 +53,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageProjectUrl>https://github.com/netpyoung/NF.Tool.ExcelFlow</PackageProjectUrl>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<Description>Generate code(C#) / database(sqlite) from Exel. </Description>
+		<Description>Generate code(C#) / database(sqlite) from Excel. </Description>
 	</PropertyGroup>
 
 	<ItemGroup>

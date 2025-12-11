@@ -21,6 +21,6 @@ OPTIONS:
     -h, --help    Prints help information
 
 COMMANDS:
-    codegen    Generate code from exel
+    codegen    Generate code from excel
     sqlite     Export sqlite database
 ```

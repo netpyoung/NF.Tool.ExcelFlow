@@ -10,7 +10,7 @@ namespace NF.Tool.ExcelFlow.Common.ExcelToModel;
 
 internal static class Parser_RegionInfo
 {
-    public static List<List<RegionInfo>> CollectRegionsFromExel(XSSFWorkbook excel)
+    public static List<List<RegionInfo>> CollectRegionsFromExcel(XSSFWorkbook excel)
     {
         List<List<RegionInfo>> ret = new List<List<RegionInfo>>(capacity: excel.NumberOfSheets);
         for (int sheetIndex = 0; sheetIndex < excel.NumberOfSheets; ++sheetIndex)

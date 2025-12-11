@@ -5,7 +5,7 @@
 ``` sh
 $ dotnet excel-flow codegen --help
 DESCRIPTION:
-Generate code from exel
+Generate code from excel
 
 USAGE:
     NF.Tool.ExcelFlow.CLI codegen [OPTIONS]

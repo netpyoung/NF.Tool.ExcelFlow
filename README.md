@@ -8,7 +8,7 @@
 
 ## Overview
 
-Generate code(C#) & database(sqlite) from Exel.
+Generate code(C#) & database(sqlite) from Excel.
 
 ``` mermaid
 sequenceDiagram
@@ -34,7 +34,7 @@ sequenceDiagram
 - [Spectre.Console.Cli](https://spectreconsole.net/cli/) for parse args.
 - [SmartFormat](https://github.com/axuno/SmartFormat) for format string.
 - [sqlite-net-pcl](https://github.com/praeclarum/sqlite-net) for sqlite
-- [NPOI](https://github.com/nissl-lab/npoi) for exel
+- [NPOI](https://github.com/nissl-lab/npoi) for excel
 - [Microsoft.CodeAnalysis.CSharp](https://github.com/dotnet/roslyn) for Assembly
 
 ## License
