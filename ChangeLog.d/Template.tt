@@ -1,0 +1,96 @@
+<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#
+    //System.Diagnostics.Debugger.Launch();
+    //System.Diagnostics.Debugger.Break();
+
+    TemplateModel model = Host.GetTemplateModel();
+    ReleaseNoteConfig config = Host.GetConfig();
+#>
+<#
+    if (model.IsRenderTitle)
+    {
+        WriteLine($"## {model.ProjectData}");
+    }
+#>
+
+<#
+    foreach (Section section in model.Sections)
+    {
+        if (!string.IsNullOrEmpty(section.DisplayName))
+        {
+            WriteLine($"\n### {section.DisplayName}\n");
+        }
+
+        if (section.Categories.Count == 0)
+        {
+            WriteLine("No significant changes.\n");
+            continue;
+        }
+
+        foreach (Category category in section.Categories)
+        {
+            WriteLine($"#### {category.DisplayName}\n");
+
+            if (category.Contents.Count == 0)
+            {
+                WriteLine("No significant changes.\n");
+                continue;
+            }
+
+            foreach (Content content in category.Contents)
+            {
+                (string text, List<string> issues) = content;
+                Write($"- {text}");
+                if (issues.Count == 0)
+                {
+                    WriteLine("");
+                    continue;
+                }
+
+                if (text.Contains("\n  - ") || text.Contains("\n  * "))
+                {
+                    Write("\n\n  (");
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        Write(" (");
+                    }
+                }
+                        
+                for (int i = 0; i < issues.Count; i++)
+                {
+                    string issue = issues[i];
+                    Write(issue.Split(": ", 2)[0]);
+                    if (i < issues.Count - 1)
+                    {
+                        Write(", ");
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(text))
+                {
+                    Write(")");
+                }
+                WriteLine("");
+            }
+        
+
+            List<string> categoryIssues = category.GetAllIssues();
+            if (categoryIssues.Count > 0 && categoryIssues.First().Contains("]: "))
+            {
+                WriteLine("");
+                foreach (string issue in categoryIssues)
+                {
+                    WriteLine(issue);
+                }
+            }
+            WriteLine("");
+
+        }
+    }
+#>
