@@ -61,7 +61,7 @@ internal sealed class Command_Codegen : AsyncCommand<Command_Codegen.Settings>
 
         foreach (E_PART part in new E_PART[] { E_PART.CLIENT, E_PART.SERVER })
         {
-            if (!config.PartOrNull!.Value.HasFlag(part))
+            if (!config.Part.HasFlag(part))
             {
                 continue;
             }

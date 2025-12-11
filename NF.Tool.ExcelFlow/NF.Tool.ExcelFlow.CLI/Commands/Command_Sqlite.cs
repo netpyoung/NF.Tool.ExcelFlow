@@ -61,7 +61,7 @@ internal sealed class Command_Sqlite : AsyncCommand<Command_Sqlite.Settings>
 
         foreach (E_PART part in new E_PART[] { E_PART.CLIENT, E_PART.SERVER })
         {
-            if (!config.PartOrNull!.Value.HasFlag(part))
+            if (!config.Part.HasFlag(part))
             {
                 continue;
             }
@@ -90,7 +90,7 @@ internal sealed class Command_Sqlite : AsyncCommand<Command_Sqlite.Settings>
 
     string OutputDatabasePath(E_PART part, ExcelFlowConfig config)
     {
-        if (config.PartOrNull != E_PART.BOTH)
+        if (config.Part != E_PART.BOTH)
         {
             return config.Db.Output;
         }

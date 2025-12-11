@@ -127,7 +127,7 @@ internal static class ConfigHelper
 
         if (settings.PartOrNull != null)
         {
-            config.PartOrNull = settings.PartOrNull;
+            config.Part = settings.PartOrNull.Value;
         }
 
         if (settings is Command_Codegen.Settings settings_codegen)

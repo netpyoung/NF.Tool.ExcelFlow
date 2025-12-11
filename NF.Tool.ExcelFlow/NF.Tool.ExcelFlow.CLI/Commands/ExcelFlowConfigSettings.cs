@@ -30,6 +30,7 @@ internal class ExcelFlowConfigSettings : CommandSettings, IExcelFlowConfig
     [CommandOption("--part <PART>")]
     [TypeConverter(typeof(E_PART_Converter))]
     public E_PART? PartOrNull { get; set; } = null;
+    public E_PART Part { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 }
 
 public sealed class E_PART_Converter : TypeConverter
