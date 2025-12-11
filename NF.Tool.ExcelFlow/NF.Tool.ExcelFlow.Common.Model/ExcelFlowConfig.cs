@@ -11,7 +11,7 @@ public sealed class ExcelFlowConfig : IExcelFlowConfig
     public E_PART Part { get; set; } = E_PART.BOTH;
 
     public ExcelFlowConfig_Codegen Codegen { get; set; } = new ExcelFlowConfig_Codegen();
-    public ExcelFlowConfig_Sqlite Db { get; set; } = new ExcelFlowConfig_Sqlite();
+    public ExcelFlowConfig_Sqlite Sqlite { get; set; } = new ExcelFlowConfig_Sqlite();
 
     public static ExcelFlowConfig Default()
     {

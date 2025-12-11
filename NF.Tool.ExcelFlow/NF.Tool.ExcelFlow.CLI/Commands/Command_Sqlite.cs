@@ -46,7 +46,7 @@ internal sealed class Command_Sqlite : AsyncCommand<Command_Sqlite.Settings>
             return (int)E_EXIT_CODE.FAIL_CONFIG_VALUE;
         }
 
-        string[] excelPaths = Util.ExpandXlsxPaths(settings.InputPaths);
+        string[] excelPaths = Util.ExpandXlsxPaths(config.InputPaths);
         (ModelRoot[] models, errOrNull) = await ExcelToModelBaker.Bake(excelPaths);
         if (errOrNull != null)
         {
@@ -92,10 +92,10 @@ internal sealed class Command_Sqlite : AsyncCommand<Command_Sqlite.Settings>
     {
         if (config.Part != E_PART.BOTH)
         {
-            return config.Db.Output;
+            return config.Sqlite.Output;
         }
 
-        string originFpath = Path.GetFullPath(config.Db.Output);
+        string originFpath = Path.GetFullPath(config.Sqlite.Output);
         if (string.IsNullOrEmpty(Path.GetExtension(originFpath)))
         {
             string dir = originFpath;

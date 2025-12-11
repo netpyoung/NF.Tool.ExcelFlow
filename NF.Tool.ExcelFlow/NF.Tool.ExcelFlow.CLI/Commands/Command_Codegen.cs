@@ -22,7 +22,9 @@ internal sealed class Command_Codegen : AsyncCommand<Command_Codegen.Settings>
 
         [Description("Check code compilable")]
         [CommandOption("--check-compile")]
-        public bool IsCheckCompilable { get; set; } = false;
+        public bool? IsCheckCompilableOrNull { get; set; } = null;
+
+        public bool IsCheckCompilable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 
     public override ValidationResult Validate(CommandContext context, Settings settings)
@@ -46,7 +48,7 @@ internal sealed class Command_Codegen : AsyncCommand<Command_Codegen.Settings>
             return (int)E_EXIT_CODE.FAIL_CONFIG_VALUE;
         }
 
-        string[] excelPaths = Util.ExpandXlsxPaths(settings.InputPaths);
+        string[] excelPaths = Util.ExpandXlsxPaths(config.InputPaths);
         (ModelRoot[] models, errOrNull) = await ExcelToModelBaker.Bake(excelPaths);
         if (errOrNull != null)
         {
@@ -66,7 +68,7 @@ internal sealed class Command_Codegen : AsyncCommand<Command_Codegen.Settings>
                 continue;
             }
 
-            errOrNull = await ModelToCodeBaker.Bake(part, config, models, settings.IsCheckCompilable, settings.Output);
+            errOrNull = await ModelToCodeBaker.Bake(part, config, models, config.Codegen.IsCheckCompilable, config.Codegen.Output);
             if (errOrNull != null)
             {
                 Console.Error.WriteLine(errOrNull);

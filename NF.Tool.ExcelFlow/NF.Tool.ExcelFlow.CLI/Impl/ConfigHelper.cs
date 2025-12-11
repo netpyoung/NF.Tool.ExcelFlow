@@ -132,12 +132,21 @@ internal static class ConfigHelper
 
         if (settings is Command_Codegen.Settings settings_codegen)
         {
-            config.Codegen.Output = settings_codegen.Output;
-            config.Codegen.IsCheckCompilable = settings_codegen.IsCheckCompilable;
+            if (!string.IsNullOrEmpty(settings_codegen.Output))
+            {
+                config.Codegen.Output = settings_codegen.Output;
+            }
+            if (settings_codegen.IsCheckCompilableOrNull != null)
+            {
+                config.Codegen.IsCheckCompilable = settings_codegen.IsCheckCompilableOrNull.Value;
+            }
         }
         else if (settings is Command_Sqlite.Settings settings_db)
         {
-            config.Db.Output = settings_db.Output;
+            if (!string.IsNullOrEmpty(settings_db.Output))
+            {
+                config.Sqlite.Output = settings_db.Output;
+            }
         }
 
         string err = sb.ToString();
