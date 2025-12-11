@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="NF.Tool.ExcelFlow.CLI/NF.Tool.ExcelFlow.CLI.csproj" />
+  <Project Path="NF.Tool.ExcelFlow.Common.ExcelToDB/NF.Tool.ExcelFlow.Common.ExcelToDB.csproj" />
+  <Project Path="NF.Tool.ExcelFlow.Common.ExcelToModel/NF.Tool.ExcelFlow.Common.ExcelToModel.csproj" />
+  <Project Path="NF.Tool.ExcelFlow.Common.Model/NF.Tool.ExcelFlow.Common.Model.csproj" />
+  <Project Path="NF.Tool.ExcelFlow.Common.ModelToCode/NF.Tool.ExcelFlow.Common.ModelToCode.csproj" />
+  <Project Path="NF.Tool.ExcelFlow.Tests/NF.Tool.ExcelFlow.Tests.csproj" />
+</Solution>
