@@ -55,7 +55,7 @@ internal static class Parser_Class
         {
             MetaCell cName = new MetaCell(pc.Pos, pc.Value);
             PosCell cType = new PosCell(new int2(-1, -1), string.Empty);
-            PartCell cPart = new PartCell(new int2(-1, -1), string.Empty, E_PART.Both);
+            PartCell cPart = new PartCell(new int2(-1, -1), string.Empty, E_PART.BOTH);
             PosCell cAttr = new PosCell(new int2(-1, -1), string.Empty);
             PosCell cDesc = new PosCell(new int2(-1, -1), string.Empty);
             foreach ((E_HEADER_CLASS k, PosCell c) in dicHeader)

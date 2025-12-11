@@ -59,8 +59,7 @@ internal sealed class Command_Sqlite : AsyncCommand<Command_Sqlite.Settings>
             config.TemplatePath = Util.ExtractResourceToTempFilePath(Const.DEFAULT_TEMPLATE_T4_FILENAME);
         }
 
-
-        foreach (E_PART part in new E_PART[] { E_PART.Client, E_PART.Server })
+        foreach (E_PART part in new E_PART[] { E_PART.CLIENT, E_PART.SERVER })
         {
             if (!config.PartOrNull!.Value.HasFlag(part))
             {
@@ -91,7 +90,7 @@ internal sealed class Command_Sqlite : AsyncCommand<Command_Sqlite.Settings>
 
     string OutputDatabasePath(E_PART part, ExcelFlowConfig config)
     {
-        if (config.PartOrNull != E_PART.Both)
+        if (config.PartOrNull != E_PART.BOTH)
         {
             return config.Db.Output;
         }

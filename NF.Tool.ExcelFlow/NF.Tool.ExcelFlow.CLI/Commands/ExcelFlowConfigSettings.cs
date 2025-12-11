@@ -39,9 +39,9 @@ public sealed class E_PART_Converter : TypeConverter
     public E_PART_Converter()
     {
         _lookup = new Dictionary<string, E_PART>(StringComparer.OrdinalIgnoreCase) {
-            { "both", E_PART.Both},
-            { "client", E_PART.Client},
-            { "server", E_PART.Server},
+            { "both", E_PART.BOTH},
+            { "client", E_PART.CLIENT},
+            { "server", E_PART.SERVER},
         };
     }
 

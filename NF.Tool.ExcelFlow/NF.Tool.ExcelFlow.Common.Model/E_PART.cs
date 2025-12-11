@@ -5,7 +5,7 @@ namespace NF.Tool.ExcelFlow.Common.Model;
 [Flags]
 public enum E_PART
 {
-    Client = 1 << 0,
-    Server = 1 << 1,
-    Both = Client | Server
+    CLIENT = 1 << 0,
+    SERVER = 1 << 1,
+    BOTH = CLIENT | SERVER
 }

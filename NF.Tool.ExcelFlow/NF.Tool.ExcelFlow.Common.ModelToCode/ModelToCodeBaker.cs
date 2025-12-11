@@ -48,13 +48,13 @@ public static class ModelToCodeBaker
             string middleDir;
             switch (part)
             {
-                case E_PART.Client:
+                case E_PART.CLIENT:
                     middleDir = "client";
                     break;
-                case E_PART.Server:
+                case E_PART.SERVER:
                     middleDir = "server";
                     break;
-                case E_PART.Both:
+                case E_PART.BOTH:
                 default:
                     middleDir = string.Empty;
                     break;
