@@ -19,8 +19,8 @@ internal sealed class Program
             _ = config.UseStrictParsing();
             _ = config.SetApplicationName("NF.Tool.ExcelFlow.CLI");
 
-            // TODO init command
-
+            _ = config.AddCommand<Command_Init>("init")
+                  .WithExample("init");
             _ = config.AddCommand<Command_Codegen>("codegen")
                 .WithExample("codegen", "--input", "hello.xlsx", "--output", "outdir")
                 .WithExample("codegen", "--input", "hello.xlsx", "--output", "outdir", "--check-compile");
