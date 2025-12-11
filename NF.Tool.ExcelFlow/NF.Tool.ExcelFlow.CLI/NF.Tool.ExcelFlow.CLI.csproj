@@ -37,4 +37,40 @@
 		<!-- <PackageReference Include="Spectre.Console" Version="0.54.0" /> -->
 		<PackageReference Include="Spectre.Console.Cli" Version="0.53.1" />
 	</ItemGroup>
+
+	<!-- for nuget -->
+	<PropertyGroup>
+		<PackAsTool>true</PackAsTool>
+		<PackageId>dotnet-excel-flow</PackageId>
+		<Version>0.0.1</Version>
+		<Authors>netpyoung</Authors>
+		<Company>netpyoung</Company>
+		<Copyright>netpyoung</Copyright>
+		<ToolCommandName>dotnet-excel-flow</ToolCommandName>
+		<PackageOutputPath>./nupkg</PackageOutputPath>
+		<PackageTags>dotnet;dotnet-tool;excel-flow</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/netpyoung/NF.Tool.ExcelFlow</PackageProjectUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<Description>Generate code(C#) / database(sqlite) from Exel. </Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="$(MSBuildThisFileDirectory)../../README.md" Pack="true" PackagePath="/" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="nupkg\" />
+	</ItemGroup>
+
+	<Target Name="InstallTool" AfterTargets="Pack">
+		<Exec Command="dotnet tool list --global" ContinueOnError="true" />
+		<Exec Command="dotnet tool uninstall -g $(PackageId) || echo 'Tool not installed, skipping uninstall.'" ContinueOnError="true" />
+		<Exec Command="dotnet tool install -g --add-source $(PackageOutputPath) $(PackageId)" />
+	</Target>
+
+	<Target Name="CleanOutputDir" AfterTargets="Clean">
+		<RemoveDir Directories="$(OUTDIR)" />
+	</Target>
 </Project>
