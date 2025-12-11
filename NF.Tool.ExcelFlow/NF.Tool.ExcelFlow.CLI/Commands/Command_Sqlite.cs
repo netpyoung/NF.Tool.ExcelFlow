@@ -56,7 +56,7 @@ internal sealed class Command_Sqlite : AsyncCommand<Command_Sqlite.Settings>
 
         if (string.IsNullOrEmpty(config.TemplatePath))
         {
-            config.TemplatePath = Util.ExtractResourceToTempFilePath("Template.t4");
+            config.TemplatePath = Util.ExtractResourceToTempFilePath(Const.DEFAULT_TEMPLATE_T4_FILENAME);
         }
 
 

@@ -15,10 +15,7 @@ public sealed class ExcelFlowConfig : IExcelFlowConfig
 
     public static ExcelFlowConfig Default()
     {
-        return new ExcelFlowConfig
-        {
-            //TemplatePath = "D:\\@NF\\nf-data-flow-2\\NF.Tool.ExcelFlow\\NF.Tool.ExcelFlow.CLI\\_embedded\\Template.t4",
-        };
+        return new ExcelFlowConfig { };
     }
 }
 

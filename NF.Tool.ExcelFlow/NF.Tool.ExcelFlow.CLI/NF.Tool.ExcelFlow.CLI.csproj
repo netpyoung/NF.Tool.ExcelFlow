@@ -19,8 +19,11 @@
 		<DebugType>embedded</DebugType>
 	</PropertyGroup>
 	<ItemGroup>
-		<EmbeddedResource Include="_embedded\Template.t4">
-			<LogicalName>Template.t4</LogicalName>
+		<EmbeddedResource Include="res\Template.tt">
+			<LogicalName>Template.tt</LogicalName>
+		</EmbeddedResource>
+		<EmbeddedResource Include="res\ExcelFlow.config.toml">
+			<LogicalName>ExcelFlow.config.toml</LogicalName>
 		</EmbeddedResource>
 	</ItemGroup>
 	<ItemGroup>

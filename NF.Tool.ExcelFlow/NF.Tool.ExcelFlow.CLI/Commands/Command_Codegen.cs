@@ -56,7 +56,7 @@ internal sealed class Command_Codegen : AsyncCommand<Command_Codegen.Settings>
 
         if (string.IsNullOrEmpty(config.TemplatePath))
         {
-            config.TemplatePath = Util.ExtractResourceToTempFilePath("Template.t4");
+            config.TemplatePath = Util.ExtractResourceToTempFilePath(Const.DEFAULT_TEMPLATE_T4_FILENAME);
         }
 
         foreach (E_PART part in new E_PART[] { E_PART.Client, E_PART.Server })
