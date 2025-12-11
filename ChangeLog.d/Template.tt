@@ -12,7 +12,7 @@
 <#
     if (model.IsRenderTitle)
     {
-        WriteLine($"## {model.ProjectData}");
+        WriteLine($"## [{model.ProjectData.ProjectVersion}]");
     }
 #>
 
