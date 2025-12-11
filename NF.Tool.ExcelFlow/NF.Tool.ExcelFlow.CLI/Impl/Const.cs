@@ -11,7 +11,7 @@ internal static class Const
 # an empty message aborts.
 ";
     public const string DESCRIPTION_CONFIG = $"""
-Pass a custom config file at FILE_PATH.
+Pass a custom config file at <CONFIG_PATH>.
 Default: {DEFAULT_CONFIG_FILENAME}
 """;
 }

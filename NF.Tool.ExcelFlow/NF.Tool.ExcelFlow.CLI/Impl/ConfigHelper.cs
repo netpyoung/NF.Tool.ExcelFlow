@@ -99,8 +99,18 @@ internal static class ConfigHelper
         return x;
     }
 
-    internal static void Override(ExcelFlowConfig config, ExcelFlowConfigSettings settings)
+    internal static string? Override(ExcelFlowConfig config, ExcelFlowConfigSettings settings)
     {
+        StringBuilder sb = new StringBuilder();
+        if (settings.InputPaths.Length != 0)
+        {
+            config.InputPaths = settings.InputPaths;
+        }
+        if (config.InputPaths.Length == 0)
+        {
+            sb.AppendLine(Err.MessageWithInfo("Fail: Need inputPaths"));
+        }
+
         if (!string.IsNullOrEmpty(settings.TemplatePath))
         {
             config.TemplatePath = settings.TemplatePath;
@@ -110,15 +120,31 @@ internal static class ConfigHelper
         {
             config.Namespace = settings.Namespace;
         }
+        if (string.IsNullOrEmpty(config.Namespace))
+        {
+            sb.AppendLine(Err.MessageWithInfo("Fail: Need Namespace"));
+        }
 
+        if (settings.PartOrNull != null)
+        {
+            config.PartOrNull = settings.PartOrNull;
+        }
 
         if (settings is Command_Codegen.Settings settings_codegen)
         {
-
+            config.Codegen.Output = settings_codegen.Output;
+            config.Codegen.IsCheckCompilable = settings_codegen.IsCheckCompilable;
         }
         else if (settings is Command_Sqlite.Settings settings_db)
         {
-            //config. settings_db.OutputDatabasePath
+            config.Db.Output = settings_db.Output;
         }
+
+        string err = sb.ToString();
+        if (!string.IsNullOrEmpty(err))
+        {
+            return err;
+        }
+        return null;
     }
 }

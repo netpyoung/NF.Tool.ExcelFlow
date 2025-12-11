@@ -11,7 +11,7 @@ namespace NF.Tool.ExcelFlow.Common.ExcelToModel;
 
 internal static class Parser_Class
 {
-    public static (ClassInfo? infoOrNull, string? errOrNull) TryParse(IWorkbook excel, RegionInfo sheetRegion)
+    public static (ClassInfo? infoOrNull, string? errOrNull) Parse(IWorkbook excel, RegionInfo sheetRegion)
     {
         Debug.Assert(sheetRegion.RegionType == RegionInfo.E_REGION_TYPE.CLASS);
 
@@ -50,11 +50,12 @@ internal static class Parser_Class
     private static (List<HeaderColumnClass> val, string? errOrNull) GetHeaderColumns(ISheet sheet, Dictionary<E_HEADER_CLASS, PosCell> dicHeader, List<PosCell> columnNameMcList)
     {
         List<HeaderColumnClass> headerColumns = new List<HeaderColumnClass>(capacity: columnNameMcList.Count);
+        StringBuilder sbErr = new StringBuilder();
         foreach (PosCell pc in columnNameMcList)
         {
             MetaCell cName = new MetaCell(pc.Pos, pc.Value);
             PosCell cType = new PosCell(new int2(-1, -1), string.Empty);
-            PosCell cPart = new PosCell(new int2(-1, -1), string.Empty);
+            PartCell cPart = new PartCell(new int2(-1, -1), string.Empty, E_PART.Both);
             PosCell cAttr = new PosCell(new int2(-1, -1), string.Empty);
             PosCell cDesc = new PosCell(new int2(-1, -1), string.Empty);
             foreach ((E_HEADER_CLASS k, PosCell c) in dicHeader)
@@ -90,8 +91,13 @@ internal static class Parser_Class
                         cType = new PosCell(pos, v);
                         break;
                     case E_HEADER_CLASS.PART:
-                        // TODO(pyoung) - part validate
-                        cPart = new PosCell(pos, v);
+                        if (Enum.TryParse(v, ignoreCase: true, out E_PART part))
+                        {
+                            sbErr.AppendLine(Err.MessageWithInfo($"Fail: to parse part - {v} - {sheet.SheetName} - {pos.ToA1()}"));
+                            break;
+                        }
+
+                        cPart = new PartCell(pos, v, part);
                         break;
                     case E_HEADER_CLASS.DESC:
                         cDesc = new PosCell(pos, v);
@@ -108,6 +114,11 @@ internal static class Parser_Class
 
             HeaderColumnClass hc = new HeaderColumnClass(cName, cType, cPart, cAttr, cDesc);
             headerColumns.Add(hc);
+        }
+        string err = sbErr.ToString();
+        if (!string.IsNullOrEmpty(err))
+        {
+            return ([], err);
         }
 
         return (headerColumns, null);

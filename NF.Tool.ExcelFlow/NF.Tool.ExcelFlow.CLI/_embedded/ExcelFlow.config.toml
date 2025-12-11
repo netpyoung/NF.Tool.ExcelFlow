@@ -5,7 +5,7 @@ TemplatePath = "hello.template"
 EndOfLine    = "LF" # LF | CRLF | ENVIRONMENT
 
 [ExcelFlow.Codegen]
-OutputDirectory = "outdir"
+Output = "outdir"
 
-[ExcelFlow.Db]
-OutputDatabasePath = "a.db"
+[ExcelFlow.Sqlite]
+Output = "a.db"

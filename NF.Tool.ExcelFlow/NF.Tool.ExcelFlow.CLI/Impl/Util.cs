@@ -31,11 +31,6 @@ internal static class Util
 
     public static ValidationResult CheckInputPaths(string[] inputPaths)
     {
-        if (inputPaths.Length == 0)
-        {
-            return ValidationResult.Error("Fail: Need inputPaths");
-        }
-
         IGrouping<string, string>[] groups = inputPaths.GroupBy(x => x).Where(x => x.Count() > 1).ToArray();
         if (groups.Length != 0)
         {

@@ -9,7 +9,7 @@ namespace NF.Tool.ExcelFlow.Common.ExcelToModel;
 
 internal static class Parser_Enum
 {
-    public static (EnumInfo? infoOrNull, string? errOrNull) TryParse(IWorkbook excel, RegionInfo region)
+    public static (EnumInfo? infoOrNull, string? errOrNull) Parse(IWorkbook excel, RegionInfo region)
     {
         Debug.Assert(region.RegionType == RegionInfo.E_REGION_TYPE.ENUM);
 

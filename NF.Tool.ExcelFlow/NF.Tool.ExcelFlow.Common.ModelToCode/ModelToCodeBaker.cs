@@ -23,12 +23,12 @@ public static class ModelToCodeBaker
     public sealed record ResultGenerateCode(ModelRoot ModelRoot, string FileName, string Code, string ErrorString);
     public sealed record ParsingChunk(ResultGenerateCode ResultGenerateCode, SyntaxTree SyntaxTree, Diagnostic[] Diagnostics);
 
-    public static async Task<string?> Bake(ExcelFlowConfig config, ModelRoot[] models, bool IsCheckCompilable, string outputDirectory)
+    public static async Task<string?> Bake(E_PART part, ExcelFlowConfig config, ModelRoot[] models, bool IsCheckCompilable, string outputDirectory)
     {
         Debug.Assert(!string.IsNullOrEmpty(config.TemplatePath));
 
         string? errOrNull;
-        (ResultGenerateCode[] results, errOrNull) = await GenerateCodes(config, models);
+        (ResultGenerateCode[] results, errOrNull) = await GenerateCodes(part, config, models);
         if (errOrNull != null)
         {
             return errOrNull;
@@ -45,31 +45,45 @@ public static class ModelToCodeBaker
 
         if (!string.IsNullOrEmpty(outputDirectory))
         {
-            foreach (ResultGenerateCode r in results)
+            string middleDir;
+            switch (part)
             {
-                string path = Path.Combine(outputDirectory, r.FileName);
-                string dir = Path.GetDirectoryName(path)!;
+                case E_PART.Client:
+                    middleDir = "client";
+                    break;
+                case E_PART.Server:
+                    middleDir = "server";
+                    break;
+                case E_PART.Both:
+                default:
+                    middleDir = string.Empty;
+                    break;
+            }
+
+            (ResultGenerateCode r, string path)[] xs = results.Select(x => (r: x, path: Path.Combine(outputDirectory, middleDir, x.FileName))).ToArray();
+            foreach ((ResultGenerateCode r, string path) x in xs)
+            {
+                string dir = Path.GetDirectoryName(x.path)!;
                 Directory.CreateDirectory(dir);
             }
 
-            await Parallel.ForEachAsync(results, async (r, _) =>
+            await Parallel.ForEachAsync(xs, async (x, _) =>
             {
-                ModelRoot m = r.ModelRoot;
-                string content = r.Code;
-                string path = Path.Combine(outputDirectory, r.FileName);
+                ModelRoot m = x.r.ModelRoot;
+                string content = x.r.Code;
+                string path = x.path;
                 await File.WriteAllTextAsync(path, content, _);
             });
         }
-
         return null;
     }
 
-    public static async Task<(Assembly? val, string? errOrNull)> GetAssembly(ExcelFlowConfig config, ModelRoot[] models)
+    public static async Task<(Assembly? val, string? errOrNull)> GetAssembly(E_PART part, ExcelFlowConfig config, ModelRoot[] models)
     {
         Debug.Assert(!string.IsNullOrEmpty(config.TemplatePath));
 
         string? errOrNull;
-        (ResultGenerateCode[] results, errOrNull) = await GenerateCodes(config, models);
+        (ResultGenerateCode[] results, errOrNull) = await GenerateCodes(part, config, models);
         if (errOrNull != null)
         {
             return (null, errOrNull);
@@ -126,7 +140,7 @@ public static class ModelToCodeBaker
         string[] splitted = tpa.Split(Path.PathSeparator);
         PortableExecutableReference[] references = splitted.Select(x => MetadataReference.CreateFromFile(x)).ToArray();
 
-        string assemblyName = "assemblyName";
+        string assemblyName = $"assemblyName-{Guid.NewGuid()}";
         SyntaxTree[] syntaxTrees = parseResults.Select(x => x.SyntaxTree).ToArray();
         CSharpCompilationOptions options = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
         CSharpCompilation compilation = CSharpCompilation.Create(assemblyName, syntaxTrees, references, options);
@@ -150,13 +164,12 @@ public static class ModelToCodeBaker
 
             peStream.Seek(0, SeekOrigin.Begin);
             pdbStream.Seek(0, SeekOrigin.Begin);
-
             Assembly assembly = AssemblyLoadContext.Default.LoadFromStream(peStream, pdbStream);
             return (assembly, null);
         }
     }
 
-    private static async Task<(ResultGenerateCode[] val, string? errOrNull)> GenerateCodes(ExcelFlowConfig config, ModelRoot[] models)
+    private static async Task<(ResultGenerateCode[] val, string? errOrNull)> GenerateCodes(E_PART part, ExcelFlowConfig config, ModelRoot[] models)
     {
         string templatePath = Path.GetFullPath(config.TemplatePath);
         if (!File.Exists(templatePath))
@@ -169,7 +182,7 @@ public static class ModelToCodeBaker
         ConcurrentBag<ResultGenerateCode> results = [];
         await Parallel.ForEachAsync(models, async (model, _) =>
         {
-            ResultGenerateCode r = await GenerateCode(config, model, templatePath, templateContent);
+            ResultGenerateCode r = await GenerateCode(part, config, model, templatePath, templateContent);
             results.Add(r);
         });
         ResultGenerateCode[] ret = results.ToArray();
@@ -190,7 +203,7 @@ public static class ModelToCodeBaker
         return (ret, null);
     }
 
-    private static async Task<ResultGenerateCode> GenerateCode(ExcelFlowConfig config, ModelRoot model, string templatePath, string templateContent)
+    private static async Task<ResultGenerateCode> GenerateCode(E_PART part, ExcelFlowConfig config, ModelRoot model, string templatePath, string templateContent)
     {
         TemplateGenerator host = new TemplateGenerator();
         host.UseInProcessCompiler();
@@ -205,6 +218,7 @@ public static class ModelToCodeBaker
         ITextTemplatingSession session = host.GetOrCreateSession();
         session["root"] = model;
         session["config"] = config;
+        session["part"] = part;
 
         // ref: https://gist.github.com/rkttu/56c8a96b48a3534a55a671bb8774931f
         ParsedTemplate parsedTemplate = host.ParseTemplate(templatePath, templateContent);
@@ -239,5 +253,4 @@ public static class ModelToCodeBaker
         string fileName = $"{fileNameWithoutExt}_{model.SheetName}.cs";
         return new ResultGenerateCode(model, fileName, renderedCode, string.Empty);
     }
-
 }

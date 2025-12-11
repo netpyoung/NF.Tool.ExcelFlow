@@ -14,15 +14,11 @@ namespace NF.Tool.ExcelFlow.CLI.Commands;
 [Description("Generate code from exel")]
 internal sealed class Command_Codegen : AsyncCommand<Command_Codegen.Settings>
 {
-    internal sealed class Settings : ExcelFlowConfigSettings
+    internal sealed class Settings : ExcelFlowConfigSettings, IExcelFlowConfig_Codegen
     {
-        [Description("Input paths")]
-        [CommandOption("-i|--input <PATH>")]
-        public string[] InputPaths { get; set; } = [];
-
         [Description("Output directory")]
-        [CommandOption("--output <DIRECTORY>")]
-        public string OutputDirectory { get; set; } = string.Empty;
+        [CommandOption("--output <OUTPUT_DIRECTORY>")]
+        public string Output { get; set; } = string.Empty;
 
         [Description("Check code compilable")]
         [CommandOption("--check-compile")]
@@ -43,7 +39,12 @@ internal sealed class Command_Codegen : AsyncCommand<Command_Codegen.Settings>
             return (int)E_EXIT_CODE.FAIL_GET_CONFIG;
         }
 
-        ConfigHelper.Override(config, settings);
+        errOrNull = ConfigHelper.Override(config, settings);
+        if (errOrNull != null)
+        {
+            Console.Error.WriteLine(errOrNull);
+            return (int)E_EXIT_CODE.FAIL_CONFIG_VALUE;
+        }
 
         string[] excelPaths = Util.ExpandXlsxPaths(settings.InputPaths);
         (ModelRoot[] models, errOrNull) = await ExcelToModelBaker.Bake(excelPaths);
@@ -58,11 +59,19 @@ internal sealed class Command_Codegen : AsyncCommand<Command_Codegen.Settings>
             config.TemplatePath = Util.ExtractResourceToTempFilePath("Template.t4");
         }
 
-        errOrNull = await ModelToCodeBaker.Bake(config, models, settings.IsCheckCompilable, settings.OutputDirectory);
-        if (errOrNull != null)
+        foreach (E_PART part in new E_PART[] { E_PART.Client, E_PART.Server })
         {
-            Console.Error.WriteLine(errOrNull);
-            return (int)E_EXIT_CODE.FAIL_BAKE_CODE;
+            if (!config.PartOrNull!.Value.HasFlag(part))
+            {
+                continue;
+            }
+
+            errOrNull = await ModelToCodeBaker.Bake(part, config, models, settings.IsCheckCompilable, settings.Output);
+            if (errOrNull != null)
+            {
+                Console.Error.WriteLine(errOrNull);
+                return (int)E_EXIT_CODE.FAIL_BAKE_CODE;
+            }
         }
         return 0;
     }

@@ -106,7 +106,7 @@ public static class ExcelToModelBaker
                     break;
                 case RegionInfo.E_REGION_TYPE.ENUM:
                     {
-                        (EnumInfo? infoOrNull, string? errOrNull) = Parser_Enum.TryParse(excel, sheetRegion);
+                        (EnumInfo? infoOrNull, string? errOrNull) = Parser_Enum.Parse(excel, sheetRegion);
                         if (errOrNull != null)
                         {
                             sbErr.AppendLine(errOrNull);
@@ -118,7 +118,7 @@ public static class ExcelToModelBaker
                     break;
                 case RegionInfo.E_REGION_TYPE.CLASS:
                     {
-                        (ClassInfo? infoOrNull, string? errOrNull) = Parser_Class.TryParse(excel, sheetRegion);
+                        (ClassInfo? infoOrNull, string? errOrNull) = Parser_Class.Parse(excel, sheetRegion);
                         if (errOrNull != null)
                         {
                             sbErr.AppendLine(errOrNull);
