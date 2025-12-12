@@ -91,7 +91,7 @@ internal static class Parser_Class
                         cType = new PosCell(pos, v);
                         break;
                     case E_HEADER_CLASS.PART:
-                        if (Enum.TryParse(v, ignoreCase: true, out E_PART part))
+                        if (!Enum.TryParse(v, ignoreCase: true, out E_PART part))
                         {
                             sbErr.AppendLine(Err.MessageWithInfo($"Fail: to parse part - {v} - {sheet.SheetName} - {pos.ToA1()}"));
                             break;

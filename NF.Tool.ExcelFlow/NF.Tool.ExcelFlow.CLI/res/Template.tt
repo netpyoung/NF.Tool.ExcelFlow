@@ -62,9 +62,16 @@ namespace <#= config.Namespace #>
     public partial class <#= classInfo.ClassName #>
     {
 <#
-        PushIndent("    ");
         foreach (var hc in classInfo.HeaderColumns)
         {
+            if (!hc.Part.HasFlags(part))
+            {
+                PushIndent("    // ");
+            }
+            else
+            {
+                PushIndent("    ");
+            }
             foreach (var meta in hc.Name.Metas)
             {
                 if (!string.IsNullOrEmpty(meta))  WriteLine(CurrentIndent + meta);
@@ -73,8 +80,8 @@ namespace <#= config.Namespace #>
             if (!string.IsNullOrEmpty(hc.Attr.Value)) WriteLine(CurrentIndent + hc.Attr);
             if (!string.IsNullOrEmpty(hc.Desc.Value)) WriteLine(CurrentIndent + $"[Description(\"{hc.Desc}\")]");
             WriteLine(CurrentIndent + $"public {hc.Type} {hc.Name} {{ get; set; }}");
+            PopIndent();
         }
-        PopIndent();
 #>
     }
 <# } #>
