@@ -45,7 +45,7 @@
 	<PropertyGroup>
 		<PackAsTool>true</PackAsTool>
 		<PackageId>dotnet-excel-flow</PackageId>
-		<Version>0.0.1</Version>
+		<Version>0.0.2</Version>
 		<Authors>netpyoung</Authors>
 		<Company>netpyoung</Company>
 		<Copyright>netpyoung</Copyright>
