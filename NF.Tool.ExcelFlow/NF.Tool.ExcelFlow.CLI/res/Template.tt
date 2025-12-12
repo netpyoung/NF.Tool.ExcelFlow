@@ -25,19 +25,19 @@
 <#
     foreach (var classInfo in root.ClassInfos)
     {
-        WriteLine($"// {classInfo.ClassName,-30} | {classInfo.RegionInfo}");
+        WriteLine($"// class: {classInfo.ClassName,-30} | {classInfo.RegionInfo}");
     }
 #>
 <#
     foreach (var enumInfo in root.EnumInfos)
     {
-        WriteLine($"// {enumInfo.EnumName,-30} | {enumInfo.RegionInfo}");
+        WriteLine($"// enum : {enumInfo.EnumName,-30} | {enumInfo.RegionInfo}");
     }
 #>
 <#
     foreach (var constInfo in root.ConstInfos)
     {
-        WriteLine($"// {constInfo.ConstName,-30} | {constInfo.RegionInfo}");
+        WriteLine($"// const: {constInfo.ConstName,-30} | {constInfo.RegionInfo}");
     }
 #>
 
@@ -127,7 +127,7 @@ namespace <#= config.Namespace #>
     }
     PopIndent();
 #>
-    public enum <#= constInfo.ConstName #>
+    public static class <#= constInfo.ConstName #>
     {
 <#
         PushIndent("    ");
