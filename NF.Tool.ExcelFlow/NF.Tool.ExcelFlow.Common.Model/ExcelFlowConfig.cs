@@ -22,7 +22,7 @@ public sealed class ExcelFlowConfig : IExcelFlowConfig
 public sealed class ExcelFlowConfig_Codegen : IExcelFlowConfig_Codegen
 {
     public string Output { get; set; } = "outdir";
-    public bool IsCheckCompilable { get; set; } = true;
+    public bool IsCheckCompilable { get; set; } = false;
 }
 
 public sealed class ExcelFlowConfig_Sqlite : IExcelFlowConfig_Sqlite
