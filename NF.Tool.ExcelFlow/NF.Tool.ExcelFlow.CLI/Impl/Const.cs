@@ -14,4 +14,6 @@ internal static class Const
 Pass a custom config file at <CONFIG_PATH>.
 Default: {DEFAULT_CONFIG_FILENAME}
 """;
+    public const string DEFUALT_EXCEL_FLOW_DIR = "ExcelFlow.d";
+    public const string DEFAULT_SAMPLE_XLSX = "Sample.xlsx";
 }

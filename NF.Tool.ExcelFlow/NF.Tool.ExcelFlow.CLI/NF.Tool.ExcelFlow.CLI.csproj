@@ -25,6 +25,9 @@
 		<EmbeddedResource Include="res\ExcelFlow.config.toml">
 			<LogicalName>ExcelFlow.config.toml</LogicalName>
 		</EmbeddedResource>
+		<EmbeddedResource Include="res\Sample.xlsx">
+			<LogicalName>Sample.xlsx</LogicalName>
+		</EmbeddedResource>
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\NF.Tool.ExcelFlow.Common.ExcelToDB\NF.Tool.ExcelFlow.Common.ExcelToDB.csproj" />
